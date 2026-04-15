@@ -6,15 +6,15 @@ typedef struct{
         int event_count;
 }user_state_t;
 
-static void my_tick_handler(int tick, int *ctx){
+static void my_tick_handler(int tick, void *ctx){
     user_state_t *state = (user_state_t*)ctx;
     state->event_count++;
     printf("[%s] tick=%d, total_events=%d\n", state->name, tick, state->event_count);
 }
 
 int main(){
-    user_state_t alice_state = {.name="Alice", .event_count=0};
-    user_state_t bob_state = {.name="Bob", .event_count=0};
+    user_state_t alice_state = {.name="Alice"};
+    user_state_t bob_state = {.name="Bob"};
 
     timer_t alice_timer, bob_timer;
     timer_init(&alice_timer, my_tick_handler, &alice_state);
